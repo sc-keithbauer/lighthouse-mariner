@@ -1,18 +1,25 @@
 {
-  "name": "gmi-lighthouse-perf",
+  "name": "lighthouse-mariner",
   "version": "1.0.0",
-  "description": "For quickly testing pages for performance 3 times and grabbing the average for comparison.",
-  "main": "LightHouse-TripleScan.js",
+  "description": "A command line tool for testing multiple URLs with Google Lighthouse",
+  "main": "index.js",
   "dependencies": {
+    "chalk": "^4.1.0",
     "chrome-launcher": "^0.13.4",
-    "lighthouse": "^6.4.1"
+    "commander": "^6.2.0",
+    "lighthouse": "^6.4.1",
+    "mkdirp": "^1.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sc-keithbauer/lighthouse-mariner.git"
   },
   "devDependencies": {},
-  "scripts": {
-    "perf:list": "node ./LightHouse-Scan-List.js",
-    "perf": "node ./LightHouse-Scan.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "scripts": {},
+  "preferGlobal": true,
+  "bin": {
+    "lighthouse-mariner": "./js/cmd.js"
   },
-  "author": "",
+  "author": "Keith Bauer",
   "license": "ISC"
 }
