@@ -70,8 +70,9 @@ function cellScore(data) {
 }
 
 function getScoreClass(score) {
-  if (score !== 0 || !score || isNaN(score)) return '';
+  if (isNaN(score)) return '';
   if (score <= 49) return 'red';
+  if (score >=50 && score <= 89) return 'orange';
   if (score >= 90) return 'green';
-  return 'orange';
+  return '';
 }
