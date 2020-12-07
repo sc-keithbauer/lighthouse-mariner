@@ -1,8 +1,10 @@
 "use strict";
 const { getNiceDate } = require("../utils");
 
+const path = require('path');
 const fs = require("fs");
-const styles = fs.readFileSync("./css/html-report.css", 'utf8')
+var pathToModule = path.dirname(path.dirname(__dirname));
+const styles = fs.readFileSync(pathToModule + "/css/html-report.css", 'utf8')
 
 module.exports = htmlOutput;
 
