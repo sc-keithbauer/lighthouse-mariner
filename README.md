@@ -1,19 +1,11 @@
 # Lighthouse Mariner
 
-## Installation
-
-```
-$ npm install -g lighthouse-mariner
-```
-
-# Lighthouse Mariner
-
 A command line tool for testing multiple URLs with Google Lighthouse
 
 ## Install
 
 ```
-$ npm install -g
+$ npm install -g lighthouse-mariner
 ```
 
 ## Table of Contents

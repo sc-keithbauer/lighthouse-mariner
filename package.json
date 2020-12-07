@@ -1,6 +1,6 @@
 {
   "name": "lighthouse-mariner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A command line tool for testing multiple URLs with Google Lighthouse",
   "main": "index.js",
   "dependencies": {
