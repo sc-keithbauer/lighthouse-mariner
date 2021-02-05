@@ -1,37 +1,64 @@
 body {
-    font-family: Arial, sans-serif;
-    font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
 }
 table {
-    border-collapse: collapse;
-    border: 2px solid black;
+  border-collapse: collapse;
+  border: 2px solid black;
+  max-width: 100%;
+  table-layout: fixed;
 }
-td, th {
-    padding: 10px 20px;
+td,
+th {
+  padding: 10px 20px;
 }
 .red {
-    color: red;
+  color: red;
 }
 .orange {
-    color: orange;
+  color: orange;
 }
 .green {
-    color: green;
+  color: green;
 }
 .red,
 .green,
 .orange {
-    text-align: center;
-    font-weight: bold;
+  text-align: center;
+  font-weight: bold;
 }
 .url {
-    font-size: 12px;
+  font-size: 12px;
 }
-tbody td:nth-child(even) {
-    background-color: #f2f2f2;
-    border-left: 3px solid black;
-}
+
 th {
-    background-color:#444;
-    color:white;
+  background-color: #444;
+  color: white;
+}
+
+table.scores tbody td:nth-child(even) {
+  background-color: #f2f2f2;
+  border-left: 3px solid black;
+}
+
+table.metrics .metric {
+  text-align: center;
+  width: 30px;
+}
+table.metrics tbody td.metric.convert-s::after {
+  content: 's';
+}
+table.metrics tbody td.metric.convert-ms::after {
+  content: 'ms';
+}
+
+table.metrics tbody td:nth-child(4n + 3),
+table.metrics tbody td:nth-child(4n + 4) {
+  background-color: #f2f2f2;
+}
+
+table.metrics tbody td:nth-child(4n + 2),
+table.metrics tbody td:nth-child(4n + 4),
+table.metrics tbody td:nth-child(1) {
+  border-right: 3px solid black;
 }
