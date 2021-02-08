@@ -78,6 +78,8 @@ The console will also display a table of the results when completed.
 
 A folder is generated in your working directory (if it doesn't already exist), named `lighthouse-mariner-reports/`. All output files will be created here.
 
+Use the `-o` flag and specify a directory to change the output directory.
+
 ### JSON
 
 As the script runs lighthouse on each URL, it will add the latest scan info to a `audit-{TIMESTAMP}.report.json` file. (If the script ends prematurely for any reason, the latest data will be available in this file.)
