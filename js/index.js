@@ -44,7 +44,7 @@ async function execute(options) {
   generateHtmlSummary(summary);
 
   const perfTime = process.hrtime(hrstart);
-  logger.log('Execution time: %ds %dms', perfTime[0], perfTime[1] / 1000000);
+  logger.log(`Execution time: ${perfTime[0]}s ${perfTime[1] / 1000000}ms`);
 }
 
 function setup(opts) {
@@ -102,6 +102,7 @@ function summarize(report) {
   let summary = {
     scales: report[0].scales,
     scores: [],
+    version: report[0].version,
   };
 
   report.forEach((item) => {

@@ -95,9 +95,12 @@ async function runLH(url, runs, name, flags, configs) {
   let scores = {},
     metrics = {},
     scales = {},
-    runnerResult;
+    runnerResult,
+    lighthouseVersion;
   for (let x = 1; x <= runs; x++) {
     runnerResult = await lighthouse(url, options, config);
+
+    lighthouseVersion = runnerResult.lhr.lighthouseVersion;
 
     // Collect Category scores
     for (let x in runnerResult.lhr.categories) {
@@ -137,6 +140,7 @@ async function runLH(url, runs, name, flags, configs) {
     scores,
     metrics,
     scales,
+    lighthouseVersion
   };
 }
 
@@ -159,6 +163,7 @@ function displayResults(results) {
     scores: results.scores,
     metrics: results.metrics,
     scales: results.scales,
+    version: results.lighthouseVersion,
   };
   return display;
 }

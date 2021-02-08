@@ -27,6 +27,7 @@ function htmlOutput(obj) {
       <body>
         <div class="content">
           <h1>Lighthouse Report - ${Utils.getNiceDate()}</h1>
+          <h4>Version ${obj.version}</h4>
 
           <h2>Overall Scores</h2>
           <table class="scores">
@@ -121,6 +122,9 @@ function getMetricsTables(obj) {
           cell(metricScore, [...cellClass, 'metric_score'])
         );
       });
+
+      cells.push(cell(generateLinkToCalculator(data.metrics, device, obj.version), ['metric']));
+
       return `<tr>${cells.join('')}</tr>`;
     });
 
@@ -135,6 +139,7 @@ function getMetricsTables(obj) {
             <th>URL</th>
             <th>Overall Score</th>
             ${metricTitles.join('')}
+            <th>Score Calculation</th>
           </tr>
         </thead>
         <tbody>
@@ -176,4 +181,19 @@ function titleCase(input) {
     sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
   }
   return sentence.join(' ');
+}
+
+function generateLinkToCalculator(metrics, device, version) {
+  let data = {
+    FCP: Math.round(metrics['first-contentful-paint'][device].value),
+    SI: Math.round(metrics['speed-index'][device].value),
+    LCP: Math.round(metrics['largest-contentful-paint'][device].value),
+    TTI: Math.round(metrics['interactive'][device].value),
+    TBT: Math.round(metrics['total-blocking-time'][device].value),
+    CLS: parseFloat(metrics['cumulative-layout-shift'][device].value).toFixed(3),
+    device,
+    version,
+  };
+  let searchParams = new URLSearchParams(data).toString();
+  return `<a target="_blank" href="https://googlechrome.github.io/lighthouse/scorecalc/#${searchParams}">Calculator</a>`;
 }

@@ -24,15 +24,16 @@ $ npm install -g lighthouse-mariner
 $ lighthouse-mariner --help
   Usage: cmd [options]
 
-  Options:
-  -s, --sites [sites]    a comma delimited list of site urls to analyze with Lighthouse
-  -f, --file <path>      an input file with a site url per-line to analyze with Lighthouse
-  -p, --passes <number>  How many passes should be run on each route to generate each average score? (default: 1)
-  -d, --desktop-only     Only run using desktop profile
-  -m, --mobile-only      Only run using mobile profile
-  -q, --quiet            Hide all console output
-  -V, --version          output the version number
-  -h, --help             display help for command
+Options:
+  -s, --sites [sites]            a comma delimited list of site urls to analyze with Lighthouse
+  -f, --file <path>              an input file with a site url per-line to analyze with Lighthouse
+  -p, --passes <number>          How many passes should be run on each route to generate each average score? (default: 1)
+  -o, --output-directory <path>  Directory to save output files (default: "./lighthouse-mariner-reports")
+  -d, --desktop-only             Only run using desktop profile
+  -m, --mobile-only              Only run using mobile profile
+  -q, --quiet                    Hide all console output
+  -V, --version                  output the version number
+  -h, --help                     display help for command
 ```
 
 ## How to
