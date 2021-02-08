@@ -22,36 +22,48 @@ const deviceConfigs = {
 };
 
 // Functions
-async function processDevice(url, runs, device, flags, config) {
+async function processDevice(url, runs, device, flags, config, tries) {
+  tries = tries || 1;
   if (!quiet) process.stdout.write(`${device.capitalize()}: running...`);
   try {
-    // TODO: capture time before/after lh runs better
-    // console.time(device);
     let results = await runLH(url, runs, device, flags, config);
 
     if (!quiet) process.stdout.clearLine();
     if (!quiet) process.stdout.cursorTo(0);
     if (!quiet) process.stdout.write(`${device.capitalize()}:\n`);
-    if (!quiet)
+
+    if (!quiet) {
       process.stdout.write(
         `\tPerformance:\t ${displayScore(
           Math.round(average(results.scores.performance))
         )}`
       );
-    if (!quiet)
       process.stdout.write(
         `\tAccessibility:\t ${displayScore(
           Math.round(average(results.scores.accessibility))
+        )}`
+      );
+      process.stdout.write(
+        `\tSEO:\t ${displayScore(Math.round(average(results.scores.seo)))}`
+      );
+      process.stdout.write(
+        `\tBest Practices:\t ${displayScore(
+          Math.round(average(results.scores['best-practices']))
         )}\n`
       );
+    }
 
     let display = displayResults(results);
-    // console.timeEnd(device);
     return display;
   } catch (err) {
     logger.error(err);
-    // logger.log('Trying again...');
-    // return processDevice(url, runs, device, flags, config);
+
+    if (tries >= 3) {
+      logger.error('Tried 3 times....moving on...');
+      return;
+    }
+    logger.log('Trying again...');
+    return processDevice(url, runs, device, flags, config, ++tries);
   }
 }
 
@@ -64,7 +76,7 @@ async function runLH(url, runs, name, flags, configs) {
   const options = Object.assign(
     {
       output: 'json',
-      onlyCategories: ['performance', 'accessibility'],
+      onlyCategories: ['performance', 'accessibility', 'seo', 'best-practices'],
       onlyAudits: ['metrics'],
       // skipAudits: ['screenshot-thumbnails', 'final-screenshot', 'full-page-screenshot'],
       port: chrome.port,
@@ -140,7 +152,7 @@ async function runLH(url, runs, name, flags, configs) {
     scores,
     metrics,
     scales,
-    lighthouseVersion
+    lighthouseVersion,
   };
 }
 
@@ -248,7 +260,7 @@ const logger = {
   },
   error: (msg) => {
     if (quiet) return;
-    console.error(chalk.red(msg));
+    console.error('\n' + chalk.red(msg));
   },
   table: (msg) => {
     if (quiet) return;

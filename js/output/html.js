@@ -5,6 +5,8 @@ const fs = require('fs');
 var pathToModule = path.dirname(path.dirname(__dirname));
 const styles = fs.readFileSync(pathToModule + '/css/html-report.css', 'utf8');
 const Utils = require('../utils');
+const version = require('../../package.json').version;
+
 
 let metrics = {
   'first-contentful-paint': 's',
@@ -27,7 +29,6 @@ function htmlOutput(obj) {
       <body>
         <div class="content">
           <h1>Lighthouse Report - ${Utils.getNiceDate()}</h1>
-          <h4>Version ${obj.version}</h4>
 
           <h2>Overall Scores</h2>
           <table class="scores">
@@ -43,6 +44,14 @@ function htmlOutput(obj) {
           ${getMetricsTables(obj)}
 
         </div>
+
+        <br />
+        <hr />
+        <h5>
+          Mariner Version ${version}
+          <br />
+          Lighthouse Version ${obj.version}
+        </h5>
       </body>
     </html>`;
 }
@@ -53,8 +62,14 @@ function getScoreTableHeaders(obj) {
         <th rowspan='2' class="url-header">URL</th>
         <th colspan="2" class="performance">Performance</th>
         <th colspan="2" class="accessibility">Accessibility</th>
+        <th colspan="2" class="seo">SEO</th>
+        <th colspan="2" class="best-practices">Best Practices</th>
     </tr>
     <tr>
+        <th class="desktop">Desktop</th>
+        <th class="mobile">Mobile</th>
+        <th class="desktop">Desktop</th>
+        <th class="mobile">Mobile</th>
         <th class="desktop">Desktop</th>
         <th class="mobile">Mobile</th>
         <th class="desktop">Desktop</th>
@@ -71,6 +86,10 @@ function getScoreTableGuts(obj) {
             ${cellScore(item.performance.mobile)}
             ${cellScore(item.accessibility.desktop)}
             ${cellScore(item.accessibility.mobile)}
+            ${cellScore(item.seo.desktop)}
+            ${cellScore(item.seo.mobile)}
+            ${cellScore(item['best-practices'].desktop)}
+            ${cellScore(item['best-practices'].mobile)}
         </tr>`;
     return row;
   });
