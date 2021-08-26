@@ -1,3 +1,17 @@
+# 2.0.0 (2021-08-26)
+
+## Improvements
+
+* Compare command added that scans a directory of mariner output json files, and kicks out a comparison html page
+* Minor alteration to the way data is saved in output json files
+
+# 1.3.0 (2021-02-08)
+
+## Improvements
+
+* Add SEO and Best Practices to captured metrics
+* Add retry mechanism for failed lighthouse runs
+
 # 1.2.0 (2021-02-08)
 
 ## Improvements

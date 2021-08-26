@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{Report Title}</title>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <style>
+      {{ lineChartCss | safe }}
+    </style>
+  </head>
+  <body data-device="desktop">
+    <h1>Mariner Comparison</h1>
+
+    <nav>
+      <section class="device">
+        <button class="desktop">Desktop</button>
+        <button class="mobile">Mobile</button>
+      </section>
+    </nav>
+
+    <main>
+
+    </main>
+
+    <script>
+      {{ lineChartJs | safe }}
+    </script>
+
+    <script type="text/javascript">
+      const dataset = {{ data | safe }};
+      processDataset(dataset);
+    </script>
+
+  </body>
+</html>

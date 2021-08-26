@@ -1,0 +1,150 @@
+$topMargin: 50px;
+body {
+  margin-top: $topMargin;
+  font-family: Arial, sans-serif;
+
+  &[data-device="desktop"] {
+    nav button.desktop {
+      @extend %activeButton;
+    }
+    [data-device="desktop"] {
+      display: flex;
+    }
+  }
+
+  &[data-device="mobile"] {
+    nav button.mobile {
+      @extend %activeButton;
+    }
+    [data-device="mobile"] {
+      display: flex;
+    }
+  }
+}
+
+nav {
+  background-color: #CCC;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $topMargin;
+  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.4);
+
+  button {
+    // inactive state
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    font-size: 30px;
+  }
+
+}
+
+section {
+  &.device {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+  }
+}
+
+%activeButton {
+  background-color: black;
+  color: white;
+}
+
+.scanUrl {
+  display: none;
+  flex-flow: row wrap;
+  align-items: center;
+
+  h1, h2, h3 {
+    flex: 1 0 100%;
+  }
+  svg {
+    flex: 1 1 40%;
+  }
+  table {
+    flex: 1 1 auto;
+  }
+}
+
+.typeName {
+  text-transform: capitalize;
+}
+
+svg {
+  max-width: 600px;
+  display: block;
+}
+.legend {
+  display: none;
+  text {
+    font-size: 12px;
+  }
+}
+.lineText {
+  font-size: 12px;
+  font-family: Arial;
+}
+.lineText.metric {
+  display: none;
+}
+.score path {
+  stroke-width: 3;
+}
+
+table {
+  border-collapse: collapse;
+
+  td, th {
+    border-collapse: collapse;
+    border: 2px solid black;
+  }
+}
+
+.scoreCell,
+.score-positive,
+.score-negative {
+  font-size: 20px;
+  text-align: center;
+}
+
+.score-positive {
+  background-color: green;
+  color: white;
+}
+.score-negative {
+  background-color: red;
+  color: white;
+}
+
+
+%red {
+  color: red;
+}
+%yellow {
+  color: orange;
+}
+%green {
+  color: green;
+}
+
+@for $i from 0 through 49 {
+  [data-score="#{$i}"]) {
+    @extend %red;
+  }
+}
+
+@for $i from 50 through 89 {
+  [data-score="#{$i}"]) {
+    @extend %yellow;
+  }
+}
+
+@for $i from 90 through 100 {
+  [data-score="#{$i}"]) {
+    @extend %green;
+  }
+}

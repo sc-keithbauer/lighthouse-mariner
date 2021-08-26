@@ -13,12 +13,15 @@ $ npm install -g lighthouse-mariner
 - [Lighthouse Mariner](#lighthouse-mariner)
   - [Install](#install)
   - [Table of Contents](#table-of-contents)
-  - [Usage](#usage)
-  - [How to](#how-to)
-  - [Output](#output)
+  - [Site Scan Tool](#site-scan-tool)
+  - [Compare Tool](#compare-tool)
   - [License](#license)
 
-## Usage
+---
+
+## Site Scan Tool
+
+### Usage
 
 ```sh
 $ lighthouse-mariner --help
@@ -36,9 +39,9 @@ Options:
   -h, --help                     display help for command
 ```
 
-## How to
+### How to
 
-### Use --sites flag
+#### Use --sites flag
 
 ```
 $ lighthouse-mariner -s http://www.google.com
@@ -48,7 +51,7 @@ Multiple sites:
 $ lighthouse-mariner -s http://www.google.com,http://www.yahoo.com
 ```
 
-### Use --file usage
+#### Use --file usage
 Create a text file containing each URL you would like to audit (1 per line). This example can be found in the `examples/` folder of the repo.
 
 `url-list.txt:`
@@ -66,27 +69,54 @@ To run audit on files:
 $ lighthouse-mariner -f ./url-list.txt
 ```
 
-## Output
+### Output
 
-### Console
+#### Console
 
 If the `-q` flag is not used, the console will show the progress of each scan as it completes.
 
 The console will also display a table of the results when completed.
 
-### Folder
+#### Folder
 
 A folder is generated in your working directory (if it doesn't already exist), named `lighthouse-mariner-reports/`. All output files will be created here.
 
 Use the `-o` flag and specify a directory to change the output directory.
 
-### JSON
+#### JSON
 
 As the script runs lighthouse on each URL, it will add the latest scan info to a `audit-{TIMESTAMP}.report.json` file. (If the script ends prematurely for any reason, the latest data will be available in this file.)
 
-### HTML
+#### HTML
 
 When the script completes, it will create an HTML report: `audit-{TIMESTAMP}.report.html`.
+
+#### Example
+![](.images/scan-tool.png)
+
+---
+
+## Compare Tool
+
+The compare tool can be used to monitor progress of routes over time.
+This tool will accumulate all scan data from a directory, group it by each route, and generate an output HTML file that will display the differences of the scans over time via graphs and tables.
+
+### Usage
+
+```sh
+$ lighthouse-mariner compare --help
+Usage: cmd compare [options]
+
+compare sites scans over time to monitor progress
+
+Options:
+  -f, --folder <path>  name of a absolute path, relative path, or name of a directory within /lighthouse-mariner-reports folder
+  -V, --version        output the version number
+  -h, --help           display help for command
+```
+
+### Example output
+![](.images/compare-tool.png)
 
 ## License
 
