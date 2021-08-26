@@ -221,10 +221,16 @@ function generateTable(url, device, data) {
     let th = headerRow.appendElement('th');
     th.append(new Date(item.date).toLocaleDateString('en-US', {timeZone: 'UTC'}));
 
-    if (idx != 0) {
-      th.setAttribute('colspan', 2);
-    }
+    // if (idx != 0) {
+    //   th.setAttribute('colspan', 2);
+    // }
+
   });
+  let lastScanHeader = headerRow.appendElement('th');
+  lastScanHeader.append('+/- since last scan');
+
+  let allTimeHeader = headerRow.appendElement('th');
+  allTimeHeader.append('+/- all time');
 
   Object.entries(data).forEach(([nada, types]) => {
     Object.entries(types).forEach(([typeName, scans]) => {
@@ -241,14 +247,25 @@ function generateTable(url, device, data) {
         td.setAttribute('data-score', scan.score);
         td.append(scan.score);
 
-        if (idx != 0) {
-          let scoreDiff = scan.score - applicableScans[0].score;
-          let tdCompare = contentRow.appendElement('td');
-          tdCompare.append(scoreDiff);
-          tdCompare.setAttribute('class', scoreDiff < 0 ? 'score-negative' : 'score-positive');
-        }
+        // if (idx != 0) {
+        //   let scoreDiff = scan.score - applicableScans[0].score;
+        //   let tdCompare = contentRow.appendElement('td');
+        //   tdCompare.append(scoreDiff);
+        //   tdCompare.setAttribute('class', scoreDiff < 0 ? 'score-negative' : 'score-positive');
+        // }
 
       });
+
+      // Comparison cells
+      let lastScanDiff = applicableScans[2].score - applicableScans[1].score;
+      let lastScanCell = contentRow.appendElement('td');
+      lastScanCell.setAttribute('class', lastScanDiff < 0 ? 'score-negative' : 'score-positive');
+      lastScanCell.append(lastScanDiff);
+
+      let allTimeScanDiff = applicableScans[2].score - applicableScans[0].score;
+      let allTimeScanCell = contentRow.appendElement('td');
+      allTimeScanCell.setAttribute('class', allTimeScanDiff < 0 ? 'score-negative' : 'score-positive');
+      allTimeScanCell.append(allTimeScanDiff);
 
     });
   });

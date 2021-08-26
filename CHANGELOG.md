@@ -1,3 +1,10 @@
+# 2.0.1 (2021-08-26)
+
+## Bugfixes
+
+* Compare was not reading new scan format properly
+* Rookie move - console log wasn't cleaned up before publishing
+
 # 2.0.0 (2021-08-26)
 
 ## Improvements

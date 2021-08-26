@@ -19,6 +19,8 @@ async function compare(options) {
     chalk.cyan('Importing audit files: ') + chalk.green(options.folder)
   );
 
+  // TODO: options.folder should remove trailing slash
+
   var tries = [options.folder, 'lighthouse-mariner-reports/' + options.folder];
   let dir;
   for (let tryDir of tries) {
@@ -38,12 +40,12 @@ async function compare(options) {
   files.forEach((item) => {
     let data = JSON.parse(fs.readFileSync(dir + '/' + item).toString());
 
-    if (!Array.isArray(data)) {
-      return; // not a audit scan from mariner
-    }
+    // if (!Array.isArray(data)) {
+    //   return; // not a audit scan from mariner
+    // }
 
-    if (data.info) {
-      parseData();
+    if (data && data.info) {
+      parseData(data);
       return;
     }
     parseOldData(data, item);
@@ -70,12 +72,12 @@ async function compare(options) {
   });
 
   let filename = `compare-report-${getNiceDate(true)}.html`;
-  console.log("🚀 ~ file: compare.js ~ line 73 ~ compare ~ filename", dir + filename)
   fs.writeFileSync(`${dir}/${filename}`, compareReport);
   console.log(`Compare report generated to: ${filename}`);
 }
 
 function parseData({ info, scans }) {
+  if (!Array.isArray(scans)) return;
   scans.forEach((scan) => {
     // let { url, device, scores, metrics } = flattenSingleValArrays(scan);
     let { url, device, scores, metrics } = scan;
