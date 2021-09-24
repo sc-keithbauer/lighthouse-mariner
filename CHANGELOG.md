@@ -1,3 +1,9 @@
+# 2.0.2 (2021-09-24)
+
+## Dependency Upgrades
+
+* Upgraded lighthouse to latest version 8.5.1
+
 # 2.0.1 (2021-08-26)
 
 ## Bugfixes
