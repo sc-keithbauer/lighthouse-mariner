@@ -4,7 +4,13 @@ const desktopConfig = require('../config/desktop-config.js');
 const lighthouse = require('lighthouse');
 const chromeLauncher = require('chrome-launcher');
 const chalk = require('chalk');
+const readline = require('readline');
 const fs = require('fs');
+
+function clearLine() {
+  readline.clearLine(process.stdout);
+  readline.cursorTo(process.stdout, 0);
+}
 
 var quiet = false;
 var devices = null;
@@ -28,8 +34,7 @@ async function processDevice(url, runs, device, flags, config, tries) {
   try {
     let results = await runLH(url, runs, device, flags, config);
 
-    if (!quiet) process.stdout.clearLine();
-    if (!quiet) process.stdout.cursorTo(0);
+    if (!quiet) clearLine();
     if (!quiet) process.stdout.write(`${device.capitalize()}:\n`);
 
     if (!quiet) {
@@ -184,8 +189,7 @@ function write(msg) {
   process.stdout.write(msg);
 }
 function clearWrite(msg) {
-  process.stdout.clearLine();
-  process.stdout.cursorTo(0);
+  clearLine();
   process.stdout.write(msg);
 }
 
