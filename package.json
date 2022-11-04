@@ -1,6 +1,6 @@
 {
   "name": "lighthouse-mariner",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "A command line tool for testing and comparing multiple URLs with Google Lighthouse",
   "main": "index.js",
   "dependencies": {
@@ -8,7 +8,7 @@
     "chrome-launcher": "^0.13.4",
     "commander": "^7.0.0",
     "dateformat": "^4.5.1",
-    "lighthouse": "^8.5.1",
+    "lighthouse": "^9.6.8",
     "lodash": "^4.17.21",
     "mkdirp": "^1.0.4",
     "node-sass": "^6.0.1",
@@ -17,6 +17,10 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sc-keithbauer/lighthouse-mariner.git"
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=14.0.0"
   },
   "devDependencies": {},
   "scripts": {},

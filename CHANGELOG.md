@@ -1,3 +1,9 @@
+# 3.0.0 (2022-11-04)
+
+## Dependency Upgrades
+
+* Upgraded lighthouse to latest version 9.6.8
+
 # 2.0.3 (2022-11-04)
 
 ## Bugfix
