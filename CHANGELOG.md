@@ -1,3 +1,9 @@
+# 2.0.3 (2022-11-04)
+
+## Bugfix
+
+* Fixed clearLine and cursorTo method failures in non-tty terminals.
+
 # 2.0.2 (2021-09-24)
 
 ## Dependency Upgrades
