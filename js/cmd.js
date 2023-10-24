@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 'use strict';
 
-const commander = require('commander'); // (normal include)
+import commander from 'commander'; // (normal include)
 const program = new commander.Command();
-const execute = require('./index');
-const compare = require('./compare');
+import execute from './index.js';
+import compare from './compare.js';
+import { version } from './version.js';
 
 program
   .command('scan', { isDefault: true })
@@ -30,7 +31,7 @@ program
   .option('-d, --desktop-only', 'Only run using desktop profile')
   .option('-m, --mobile-only', 'Only run using mobile profile')
   .option('-q, --quiet', 'Hide all console output')
-  .version(require('../package.json').version)
+  .version(version)
   .action((options) => {
     execute(options);
   });
@@ -43,7 +44,7 @@ program
     '-f, --folder <path>',
     'name of a absolute path, relative path, or name of a directory within /lighthouse-mariner-reports folder'
   )
-  .version(require('../package.json').version)
+  .version(version)
   .action((options) => {
     compare(options);
   });

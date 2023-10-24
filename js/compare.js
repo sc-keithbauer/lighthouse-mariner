@@ -1,20 +1,23 @@
 'use strict';
 
-const fs = require('fs');
-const chalk = require('chalk');
-// const Utils = require('./utils');
-const { logger, getNiceDate } = require('./utils');
-const _ = require('lodash');
-const sass = require('node-sass');
-const nunjucks = require('nunjucks');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import chalk from 'chalk';
+// import Utils from './utils.js';
+import { logger, getNiceDate } from './utils.js';
+import _ from 'lodash';
+import * as sass from 'sass';
+import nunjucks from 'nunjucks';
 nunjucks.configure(__dirname + '/templates');
 
 let definitions = {};
 let graphData = {};
 
-module.exports = compare;
-
-async function compare(options) {
+export default async function compare(options) {
   logger.log(
     chalk.cyan('Importing audit files: ') + chalk.green(options.folder)
   );

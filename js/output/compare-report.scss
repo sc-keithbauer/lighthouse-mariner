@@ -132,19 +132,19 @@ table {
 }
 
 @for $i from 0 through 49 {
-  [data-score="#{$i}"]) {
+  [data-score="#{$i}"] {
     @extend %red;
   }
 }
 
 @for $i from 50 through 89 {
-  [data-score="#{$i}"]) {
+  [data-score="#{$i}"] {
     @extend %yellow;
   }
 }
 
 @for $i from 90 through 100 {
-  [data-score="#{$i}"]) {
+  [data-score="#{$i}"] {
     @extend %green;
   }
 }

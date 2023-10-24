@@ -1,11 +1,11 @@
 'use strict';
 
-const desktopConfig = require('../config/desktop-config.js');
-const lighthouse = require('lighthouse');
-const chromeLauncher = require('chrome-launcher');
-const chalk = require('chalk');
-const readline = require('readline');
-const fs = require('fs');
+import desktopConfig from '../config/desktop-config.js';
+import lighthouse from 'lighthouse';
+import * as chromeLauncher from 'chrome-launcher';
+import chalk from 'chalk';
+import readline from 'readline';
+// import fs from 'fs';
 
 function clearLine() {
   readline.clearLine(process.stdout);
@@ -65,6 +65,7 @@ async function processDevice(url, runs, device, flags, config, tries) {
 
     if (tries >= 3) {
       logger.error('Tried 3 times....moving on...');
+      throw(err);
       return;
     }
     logger.log('Trying again...');
@@ -76,7 +77,13 @@ async function runLH(url, runs, name, flags, configs) {
   flags = flags || {};
   configs = configs || {};
 
-  const chrome = await chromeLauncher.launch({ chromeFlags: ['--headless'] });
+  const chromeFlags = [
+    // '--no-sandbox',
+    // '--disable-dev-shm-usage',
+    '--headless',
+    // 'in-process-gpu',
+  ]; // param solution from this thread
+  const chrome = await chromeLauncher.launch({ chromeFlags: chromeFlags });
 
   const options = Object.assign(
     {
@@ -225,7 +232,7 @@ function getDate() {
   return f.toISOString().split('T')[0];
 }
 
-function getNiceDate(fileName) {
+export function getNiceDate(fileName) {
   fileName = fileName || false;
   const now = new Date();
   const offsetMs = now.getTimezoneOffset() * 60 * 1000;
@@ -245,7 +252,7 @@ function getNiceDate(fileName) {
     .replace('T', ' ');
 }
 
-function getDataLookup(obj, lookupId) {
+export function getDataLookup(obj, lookupId) {
   lookupId = lookupId || null;
   if (lookupId) {
     return obj[lookupId];
@@ -257,7 +264,7 @@ function siteName(site) {
   return site.replace(/^https?:\/\//, '').replace(/[\/\?#:\*\$@\!\.]/g, '_');
 }
 
-const logger = {
+export const logger = {
   log: (msg) => {
     if (quiet) return;
     console.log(msg);
@@ -278,7 +285,7 @@ const logger = {
   },
 };
 
-module.exports = {
+export default {
   logger,
   processDevice,
   deviceConfigs,

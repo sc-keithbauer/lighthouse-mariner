@@ -1,11 +1,11 @@
 'use strict';
 
-const fs = require('fs');
-const chalk = require('chalk');
-const Utils = require('./utils');
+import fs from 'fs';
+import chalk from 'chalk';
+import Utils from './utils.js';
 const { logger } = Utils;
-const Output = require('./output');
-const _ = require('lodash');
+import Output from './output.js';
+import _ from 'lodash';
 
 let report = {
   info: {
@@ -15,9 +15,9 @@ let report = {
   scans: [],
 };
 
-module.exports = execute;
+// module.exports = execute;
 
-async function execute(options) {
+export default async function execute(options) {
   var hrstart = process.hrtime();
 
   const devices = Utils.getDevices(options);
@@ -35,21 +35,25 @@ async function execute(options) {
     logger.log(chalk.cyan('\nRunning scan on: ') + chalk.green(url));
 
     for (const device of devices) {
-      let result = await Utils.processDevice(
-        url,
-        passes,
-        device,
-        Utils.deviceConfigs[device].flags,
-        Utils.deviceConfigs[device].config
-      );
+      try {
+        let result = await Utils.processDevice(
+          url,
+          passes,
+          device,
+          Utils.deviceConfigs[device].flags,
+          Utils.deviceConfigs[device].config
+        );
 
-      report.info.scales = result.scales;
-      report.info.version = result.version;
-      delete result.scales;
-      delete result.version;
+        report.info.scales = result.scales;
+        report.info.version = result.version;
+        delete result.scales;
+        delete result.version;
 
-      report.scans.push(result);
-      Output.jsonReport(report);
+        report.scans.push(result);
+        Output.jsonReport(report);
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 

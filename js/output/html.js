@@ -1,12 +1,16 @@
 'use strict';
 
-const path = require('path');
-const fs = require('fs');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import Utils from '../utils.js';
+import { version } from '../version.js';
+
 var pathToModule = path.dirname(path.dirname(__dirname));
 const styles = fs.readFileSync(pathToModule + '/css/html-report.css', 'utf8');
-const Utils = require('../utils');
-const version = require('../../package.json').version;
-
 
 let metrics = {
   'first-contentful-paint': 's',
@@ -18,9 +22,7 @@ let metrics = {
   'cumulative-layout-shift': 3,
 };
 
-module.exports = htmlOutput;
-
-function htmlOutput(obj) {
+export default function htmlOutput(obj) {
   return `
     <html>
       <head>
@@ -142,7 +144,11 @@ function getMetricsTables(obj) {
         );
       });
 
-      cells.push(cell(generateLinkToCalculator(data.metrics, device, obj.version), ['metric']));
+      cells.push(
+        cell(generateLinkToCalculator(data.metrics, device, obj.version), [
+          'metric',
+        ])
+      );
 
       return `<tr>${cells.join('')}</tr>`;
     });
@@ -209,7 +215,9 @@ function generateLinkToCalculator(metrics, device, version) {
     LCP: Math.round(metrics['largest-contentful-paint'][device].value),
     TTI: Math.round(metrics['interactive'][device].value),
     TBT: Math.round(metrics['total-blocking-time'][device].value),
-    CLS: parseFloat(metrics['cumulative-layout-shift'][device].value).toFixed(3),
+    CLS: parseFloat(metrics['cumulative-layout-shift'][device].value).toFixed(
+      3
+    ),
     device,
     version,
   };

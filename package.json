@@ -1,18 +1,20 @@
 {
   "name": "lighthouse-mariner",
-  "version": "3.0.0",
+  "type": "module",
+  "version": "3.1.0",
   "description": "A command line tool for testing and comparing multiple URLs with Google Lighthouse",
   "main": "index.js",
   "dependencies": {
     "chalk": "^4.1.0",
-    "chrome-launcher": "^0.13.4",
+    "chrome-launcher": "^1.1.0",
     "commander": "^7.0.0",
     "dateformat": "^4.5.1",
-    "lighthouse": "^9.6.8",
+    "genversion": "^3.1.1",
+    "lighthouse": "^11.1.0",
     "lodash": "^4.17.21",
     "mkdirp": "^1.0.4",
-    "node-sass": "^6.0.1",
-    "nunjucks": "^3.2.3"
+    "nunjucks": "^3.2.3",
+    "sass": "^1.68.0"
   },
   "repository": {
     "type": "git",
@@ -22,8 +24,9 @@
     "npm": ">=8.0.0",
     "node": ">=14.0.0"
   },
-  "devDependencies": {},
-  "scripts": {},
+  "scripts": {
+    "build": "genversion -e js/version.js"
+  },
   "preferGlobal": true,
   "bin": {
     "lighthouse-mariner": "./js/cmd.js"

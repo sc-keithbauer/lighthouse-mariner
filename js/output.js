@@ -1,9 +1,9 @@
 'use strict';
 
-const fs = require('fs');
-const generateHtmlOutput = require('./output/html');
-const { logger, getDataLookup, getNiceDate } = require('./utils');
-const mkdirp = require('mkdirp');
+import fs from 'fs';
+import generateHtmlOutput from './output/html.js';
+import { logger, getDataLookup, getNiceDate } from './utils.js';
+import mkdirp from 'mkdirp';
 
 let outputFileName = null;
 let outputDir = null;
@@ -74,7 +74,7 @@ function htmlReport(obj) {
   return outputHTMLFile;
 }
 
-module.exports = {
+export default {
   getExtensions,
   setOutputOptions,
   jsonReport,

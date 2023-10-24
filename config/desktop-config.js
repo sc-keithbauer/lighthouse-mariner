@@ -5,10 +5,10 @@
  */
 'use strict';
 
-const constants = require('./constants.js');
+import constants from './constants.js';
 
 /** @type {LH.Config.Json} */
-const config = {
+export default {
   extends: 'lighthouse:default',
   settings: {
     formFactor: 'desktop',
@@ -17,5 +17,3 @@ const config = {
     emulatedUserAgent: constants.userAgents.desktop,
   },
 };
-
-module.exports = config;
